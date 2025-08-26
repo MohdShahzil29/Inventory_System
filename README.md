@@ -1,84 +1,61 @@
-Product Management System
-A full-stack MERN application for managing products with inventory history tracking, CSV import/export functionality, and real-time updates.
+# 📦 Product Management System
 
-Features
+A full-stack **MERN application** for managing products with inventory history tracking, CSV import/export functionality, and real-time updates.
 
-Frontend
-Product search and filtering with category dropdown
+---
 
-Products table with color-coded stock status
+## 🚀 Features
 
-Import/Export CSV functionality
+### 🔹 Frontend
 
-Inline editing with immediate updates
+- Product search and filtering with category dropdown
+- Products table with **color-coded stock status**
+- Import/Export **CSV functionality**
+- Inline editing with immediate updates
+- Inventory history sidebar
+- Responsive design for mobile and desktop
 
-Inventory history sidebar
+### 🔹 Backend
 
-Responsive design for mobile and desktop
+- RESTful APIs for product management
+- CSV import with duplicate handling
+- Inventory history tracking
+- Data validation and error handling
+- MongoDB integration
 
-Backend
-RESTful APIs for product management
+---
 
-CSV import with duplicate handling
+## 🛠️ Technologies Used
 
-Inventory history tracking
+### Frontend
 
-Data validation and error handling
+- [Vite](https://vitejs.dev/) (React framework)
+- [Axios](https://axios-http.com/) for API calls
+- **CSS3** with responsive design
 
-MongoDB integration
+### Backend
 
-Technologies Used
-Frontend
-Vite (React framework)
+- [Node.js](https://nodejs.org/)
+- [Express.js](https://expressjs.com/)
+- [MongoDB](https://www.mongodb.com/) with Mongoose
+- [Multer](https://www.npmjs.com/package/multer) for file uploads
+- [csv-parser](https://www.npmjs.com/package/csv-parser) for CSV processing
 
-Axios for API calls
+---
 
-CSS3 with responsive design
+## ⚙️ Installation and Setup
 
-Backend
-Node.js
+### ✅ Prerequisites
 
-Express.js
+- Node.js (**v14 or higher**)
+- MongoDB (local or Atlas cluster)
+- npm
 
-MongoDB with Mongoose
+---
 
-Multer for file uploads
+### 🔧 Backend Setup
 
-CSV-parser for CSV processing
-
-Installation and Setup
-Prerequisites
-Node.js (v14 or higher)
-
-MongoDB (local or Atlas cluster)
-
-npm
-
-Backend Setup
-Navigate to the backend directory:
-
-bash
-cd backend
-Install dependencies:
-
-bash
-npm install
-Create a .env file in the backend directory:
-
-env
-MONGODB_URI=mongodb://localhost:27017/productdb
-PORT=5000
-Start the backend server:
-
-bash
-npm run dev
-
-Frontend Setup
-Navigate to the frontend directory:
-
-bash
-cd frontend
-Install dependencies:
-
-bash
-npm install
+1. Navigate to the backend directory:
+   ```bash
+   cd backend
+   ```
