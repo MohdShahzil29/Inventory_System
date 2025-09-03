@@ -1,6 +1,14 @@
 import React, { useState } from "react";
 
-const ProductTable = ({ products, onEdit, onDelete, onViewHistory }) => {
+const ProductTable = ({
+  products,
+  onEdit,
+  onDelete,
+  onViewHistory,
+  currentPage,
+  totalPages,
+  onPageChange,
+}) => {
   const [editingId, setEditingId] = useState(null);
   const [editForm, setEditForm] = useState({});
 
@@ -179,6 +187,19 @@ const ProductTable = ({ products, onEdit, onDelete, onViewHistory }) => {
           ))}
         </tbody>
       </table>
+
+      {/* Pagination */}
+      <div className="pagination">
+        {Array.from({ length: totalPages }, (_, i) => (
+          <button
+            key={i + 1}
+            onClick={() => onPageChange(i + 1)}
+            className={`page-btn ${currentPage === i + 1 ? "active" : ""}`}
+          >
+            {i + 1}
+          </button>
+        ))}
+      </div>
     </div>
   );
 };

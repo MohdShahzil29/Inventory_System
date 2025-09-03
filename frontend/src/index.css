@@ -309,4 +309,24 @@
   .action-buttons {
     flex-direction: column;
   }
+
+  .pagination {
+    margin-top: 15px;
+    text-align: center;
+  }
+
+  .page-btn {
+    margin: 0 5px;
+    padding: 6px 12px;
+    border: 1px solid #ddd;
+    background: white;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+
+  .page-btn.active {
+    background: #007bff;
+    color: white;
+    border-color: #007bff;
+  }
 }

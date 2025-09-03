@@ -4,7 +4,7 @@ import SearchBar from "./components/SearchBar";
 import ProductTable from "./components/ProductTable";
 import ImportExport from "./components/ImportExport";
 import InventoryHistory from "./components/InventoryHistory";
-import { productAPI, historyAPI } from "./services/api";
+import { productAPI } from "./services/api";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -13,16 +13,24 @@ function App() {
   const [selectedProductHistory, setSelectedProductHistory] = useState(null);
   const [showHistorySidebar, setShowHistorySidebar] = useState(false);
 
+  // 🔹 Pagination states
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
   useEffect(() => {
-    fetchProducts();
+    fetchProducts({ page: currentPage });
     fetchCategories();
-  }, []);
+  }, [currentPage]); // depend on currentPage
 
   const fetchProducts = async (params = {}) => {
     try {
       setLoading(true);
       const response = await productAPI.getAll(params);
-      setProducts(response.data.products || response.data);
+
+      // Backend response format: { products, totalPages, currentPage }
+      setProducts(response.data.products || []);
+      setCurrentPage(response.data.currentPage || 1);
+      setTotalPages(response.data.totalPages || 1);
     } catch (error) {
       console.error("Error fetching products:", error);
     } finally {
@@ -40,12 +48,13 @@ function App() {
   };
 
   const handleSearch = async (searchTerm) => {
-    await fetchProducts({ name: searchTerm });
+    await fetchProducts({ name: searchTerm, page: 1 });
   };
 
   const handleCategoryFilter = async (category) => {
     await fetchProducts({
       category: category !== "All" ? category : undefined,
+      page: 1,
     });
   };
 
@@ -82,7 +91,7 @@ function App() {
   };
 
   const handleImportComplete = () => {
-    fetchProducts(); // Refresh the product list
+    fetchProducts({ page: 1 }); // Refresh after import
   };
 
   return (
@@ -104,6 +113,9 @@ function App() {
         ) : (
           <ProductTable
             products={products}
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={setCurrentPage} // 🔹 send page change handler
             onEdit={handleEditProduct}
             onDelete={handleDeleteProduct}
             onViewHistory={handleViewHistory}

@@ -137,6 +137,7 @@ exports.deleteProduct = async (req, res) => {
 };
 
 // Import products from CSV
+// Import products from CSV
 exports.importProducts = async (req, res) => {
   try {
     if (!req.file) {
@@ -147,9 +148,13 @@ exports.importProducts = async (req, res) => {
     const errors = [];
     const skipped = [];
 
-    // Parse CSV file
+    // Parse CSV file and normalize headers to lowercase
     fs.createReadStream(req.file.path)
-      .pipe(csv())
+      .pipe(
+        csv({
+          mapHeaders: ({ header }) => header.toLowerCase().trim(),
+        })
+      )
       .on("data", (data) => results.push(data))
       .on("end", async () => {
         for (const item of results) {
@@ -181,7 +186,8 @@ exports.importProducts = async (req, res) => {
               brand: item.brand,
               stock: parseInt(item.stock) || 0,
               status:
-                item.status || (item.stock > 0 ? "In Stock" : "Out of Stock"),
+                item.status ||
+                (parseInt(item.stock) > 0 ? "In Stock" : "Out of Stock"),
               image: item.image || "",
             });
 
